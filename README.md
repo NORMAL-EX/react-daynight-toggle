@@ -24,19 +24,19 @@ A beautiful and smooth animated day/night toggle component for React application
 ## 📦 Installation
 
 ```bash
-npm install react-day-night-toggle
+npm install react-daynight-toggle
 # or
-yarn add react-day-night-toggle
+yarn add react-daynight-toggle
 # or
-pnpm add react-day-night-toggle
+pnpm add react-daynight-toggle
 ```
 
 ## 🚀 Quick Start
 
 ```tsx
 import { useState } from 'react';
-import { DayNightToggle } from 'react-day-night-toggle';
-import 'react-day-night-toggle/dist/style.css'; // Don't forget to import CSS!
+import { DayNightToggle } from 'react-daynight-toggle';
+import 'react-daynight-toggle/dist/style.css'; // Don't forget to import CSS!
 
 function App() {
   const [theme, setTheme] = useState<'light' | 'dark'>('light');
