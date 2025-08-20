@@ -1,7 +1,8 @@
 # React Day Night Toggle
-<img width="180" height="71" alt="圆角-屏幕截图 2025-08-20 161731" src="https://github.com/user-attachments/assets/05c9db3b-8294-4690-b108-e582fd4da91c" />
-<img width="180" height="70" alt="圆角-屏幕截图 2025-08-20 161839" src="https://github.com/user-attachments/assets/27056668-0074-4b74-8871-9bcf3d22e68b" />
+<img width="180" height="71" src="https://github.com/user-attachments/assets/05c9db3b-8294-4690-b108-e582fd4da91c" />
+<img width="180" height="70" src="https://github.com/user-attachments/assets/27056668-0074-4b74-8871-9bcf3d22e68b" />
 
+<br>
 <p align="center">
   <img src="https://img.shields.io/npm/v/react-daynight-toggle" alt="npm version" />
   <img src="https://img.shields.io/npm/dm/react-daynight-toggle" alt="npm downloads" />
