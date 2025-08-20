@@ -23,6 +23,7 @@
   overflow: hidden;
   transition: 0.7s cubic-bezier(0, 0.5, 1, 1);
   cursor: pointer;
+  isolation: isolate;
 }
 
 .wrapper.light {
@@ -33,70 +34,31 @@
   background-color: #191e32;
 }
 
-/* 按钮基础样式 */
 .toggleBtn {
   margin: 7.5em 0 0 7.5em;
   width: 55em;
   height: 55em;
   border-radius: 50%;
   transition: 1s cubic-bezier(0.56, 1.35, 0.52, 1);
-  z-index: 10;
   position: relative;
+  z-index: 10;
+  will-change: transform;
 }
 
-/* 太阳样式 */
-.wrapper.light .toggleBtn.sun {
+.toggleBtn.sun {
   background-color: #ffc323;
   box-shadow: 3em 3em 5em rgba(0, 0, 0, 0.5),
     inset -3em -5em 3em -3em rgba(0, 0, 0, 0.5),
     inset 4em 5em 2em -2em #ffe650;
-  transform: translateX(0);
 }
 
-/* 月亮样式 */
-.wrapper.dark .toggleBtn.moon {
+.toggleBtn.moon {
   background-color: #c3c8d2;
   box-shadow: 3em 3em 5em rgba(0, 0, 0, 0.5),
     inset -3em -5em 3em -3em rgba(0, 0, 0, 0.5),
     inset 4em 5em 2em -2em #ffffd2;
-  transform: translateX(110em);
 }
 
-/* 浅色模式悬停效果 */
-.wrapper.light.hovered .toggleBtn.sun {
-  transform: translateX(10em);
-}
-
-.wrapper.light.hovered .bgLayer1 {
-  transform: translateX(10em);
-}
-
-.wrapper.light.hovered .bgLayer2 {
-  transform: translateX(7em);
-}
-
-.wrapper.light.hovered .bgLayer3 {
-  transform: translateX(4em);
-}
-
-/* 深色模式悬停效果 */
-.wrapper.dark.hovered .toggleBtn.moon {
-  transform: translateX(100em);
-}
-
-.wrapper.dark.hovered .bgLayer1 {
-  transform: translateX(100em);
-}
-
-.wrapper.dark.hovered .bgLayer2 {
-  transform: translateX(73em);
-}
-
-.wrapper.dark.hovered .bgLayer3 {
-  transform: translateX(46em);
-}
-
-/* 月球坑洞 */
 .crater {
   position: absolute;
   background-color: #96a0b4;
@@ -131,11 +93,12 @@
   height: 12.5em;
 }
 
-/* 背景波浪层 */
+/* 波浪背景层 */
 .bgLayer {
   position: absolute;
   border-radius: 50%;
   transition: 1s cubic-bezier(0.56, 1.35, 0.52, 1);
+  will-change: transform;
 }
 
 .bgLayer1 {
@@ -165,44 +128,41 @@
   z-index: -4;
 }
 
-/* 浅色模式下背景层默认位置 */
-.wrapper.light .bgLayer1 {
-  transform: translateX(0);
-}
-
-.wrapper.light .bgLayer2 {
-  transform: translateX(0);
-}
-
-.wrapper.light .bgLayer3 {
-  transform: translateX(0);
-}
-
-/* 深色模式下背景层默认位置 */
-.wrapper.dark .bgLayer1 {
-  transform: translateX(110em);
-}
-
-.wrapper.dark .bgLayer2 {
-  transform: translateX(80em);
-}
-
-.wrapper.dark .bgLayer3 {
-  transform: translateX(50em);
-}
-
-/* 云朵层 */
+/* 云层容器 */
 .clouds,
 .cloudsLight {
   transition: 1s cubic-bezier(0.56, 1.35, 0.52, 1);
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  will-change: transform;
 }
 
-.wrapper.light .clouds,
-.wrapper.light .cloudsLight {
+/* 主云层 */
+.clouds {
+  z-index: -2;
+}
+
+.wrapper.light .clouds {
   transform: translateY(10em);
 }
 
-.wrapper.dark .clouds,
+.wrapper.dark .clouds {
+  transform: translateY(80em);
+}
+
+/* 浅色云层 - 创造深度，位置稍微偏移 */
+.cloudsLight {
+  opacity: 0.5;
+  z-index: -3;
+}
+
+.wrapper.light .cloudsLight {
+  transform: translateY(-5em); /* 比主云层高15em */
+}
+
 .wrapper.dark .cloudsLight {
   transform: translateY(80em);
 }
@@ -211,65 +171,20 @@
   position: absolute;
   background-color: #fff;
   border-radius: 50%;
-  z-index: -1;
   transition: transform 6s, right 1s, bottom 1s;
+  will-change: transform, right, bottom;
 }
 
-/* 云朵尺寸 */
-.clouds .cloudItem:nth-child(1),
-.cloudsLight .cloudItem:nth-child(1) {
-  width: 50em;
-  height: 50em;
-}
-
-.clouds .cloudItem:nth-child(2),
-.cloudsLight .cloudItem:nth-child(2) {
-  width: 60em;
-  height: 60em;
-}
-
-.clouds .cloudItem:nth-child(3),
-.cloudsLight .cloudItem:nth-child(3) {
-  width: 60em;
-  height: 60em;
-}
-
-.clouds .cloudItem:nth-child(4),
-.cloudsLight .cloudItem:nth-child(4) {
-  width: 60em;
-  height: 60em;
-}
-
-.clouds .cloudItem:nth-child(5),
-.cloudsLight .cloudItem:nth-child(5) {
-  width: 75em;
-  height: 75em;
-}
-
-.clouds .cloudItem:nth-child(6),
-.cloudsLight .cloudItem:nth-child(6) {
-  width: 60em;
-  height: 60em;
-}
-
-.clouds {
-  z-index: -2;
-}
-
-.cloudsLight {
-  position: absolute;
-  right: 0;
-  bottom: 25em;
-  opacity: 0.5;
-  z-index: -3;
-}
-
-/* 星星场 */
+/* 星空 */
 .starField {
+  position: absolute;
+  width: 100%;
+  height: 100%;
   transform: translateY(-125em);
   z-index: -2;
   transition: 1s cubic-bezier(0.56, 1.35, 0.52, 1);
   opacity: 0;
+  will-change: transform, opacity;
 }
 
 .starField.visible {
@@ -295,116 +210,49 @@
   height: calc(2 * var(--size));
   transition: 1s cubic-bezier(0.56, 1.35, 0.52, 1);
   filter: drop-shadow(0 0 0.5em rgba(255, 255, 255, 0.5));
+  will-change: top, left;
 }
 
-/* 星星位置和动画 */
-.starElement:nth-child(1) {
-  top: 11em;
-  left: 39em;
+/* 星星动画 */
+.starElement:nth-child(odd) {
   animation: twinkle 2s ease-in-out infinite;
-  animation-delay: 0s;
 }
 
-.starElement:nth-child(2) {
-  top: 39em;
-  left: 91em;
+.starElement:nth-child(even) {
   animation: shimmer 1.5s ease-in-out infinite;
-  animation-delay: 0.3s;
+  animation-delay: 0.5s;
 }
 
-.starElement:nth-child(3) {
-  top: 26em;
-  left: 19em;
-  animation: twinkle 1.8s ease-in-out infinite;
-  animation-delay: 0.6s;
-}
-
-.starElement:nth-child(4) {
-  top: 37em;
-  left: 66em;
-  animation: shimmer 2.2s ease-in-out infinite;
-  animation-delay: 0.9s;
-}
-
-.starElement:nth-child(5) {
-  top: 21em;
-  left: 75em;
-  animation: twinkle 1.5s ease-in-out infinite;
-  animation-delay: 1.2s;
-}
-
-.starElement:nth-child(6) {
-  top: 51em;
-  left: 38em;
-  animation: shimmer 1.7s ease-in-out infinite;
-  animation-delay: 1.5s;
-}
-
-/* 深色模式悬停时星星位置 */
-.wrapper.dark.hovered .starElement:nth-child(1) {
-  top: 10em;
-  left: 36em;
-}
-
-.wrapper.dark.hovered .starElement:nth-child(2) {
-  top: 40em;
-  left: 87em;
-}
-
-.wrapper.dark.hovered .starElement:nth-child(3) {
-  top: 26em;
-  left: 16em;
-}
-
-.wrapper.dark.hovered .starElement:nth-child(4) {
-  top: 38em;
-  left: 63em;
-}
-
-.wrapper.dark.hovered .starElement:nth-child(5) {
-  top: 20.5em;
-  left: 72em;
-}
-
-.wrapper.dark.hovered .starElement:nth-child(6) {
-  top: 51.5em;
-  left: 35em;
-}
-
-/* 动画关键帧 */
 @keyframes twinkle {
-  0%,
-  100% {
+  0%, 100% {
     opacity: 1;
-    filter: brightness(1);
+    filter: brightness(1) drop-shadow(0 0 0.5em rgba(255, 255, 255, 0.5));
   }
   50% {
     opacity: 0.3;
-    filter: brightness(0.6);
+    filter: brightness(0.6) drop-shadow(0 0 0.5em rgba(255, 255, 255, 0.5));
   }
 }
 
 @keyframes shimmer {
-  0%,
-  100% {
+  0%, 100% {
     opacity: 0.8;
-    filter: brightness(1);
+    filter: brightness(1) drop-shadow(0 0 0.5em rgba(255, 255, 255, 0.5));
   }
   25% {
     opacity: 1;
-    filter: brightness(1.5);
+    filter: brightness(1.5) drop-shadow(0 0 0.5em rgba(255, 255, 255, 0.5));
   }
   50% {
     opacity: 0.4;
-    filter: brightness(0.8);
+    filter: brightness(0.8) drop-shadow(0 0 0.5em rgba(255, 255, 255, 0.5));
   }
   75% {
     opacity: 1;
-    filter: brightness(1.3);
+    filter: brightness(1.3) drop-shadow(0 0 0.5em rgba(255, 255, 255, 0.5));
   }
 }
 
-/* 星星部分 */
 .sPart {
   float: left;
   width: var(--size);
