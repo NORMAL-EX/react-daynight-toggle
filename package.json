@@ -1,17 +1,17 @@
 {
   "name": "react-daynight-toggle",
-  "version": "1.0.0",
+  "version": "1.0.3",
   "description": "A beautiful day/night theme toggle React component with smooth animations",
   "author": "dddffgg",
   "license": "MIT",
   "type": "module",
   "repository": {
     "type": "git",
-    "url": "https://github.com/yourusername/react-day-night-toggle"
+    "url": "git+https://github.com/NORMAL-EX/react-daynight-toggle.git"
   },
-  "homepage": "https://github.com/yourusername/react-day-night-toggle#readme",
+  "homepage": "https://github.com/NORMAL-EX/react-daynight-toggle#readme",
   "bugs": {
-    "url": "https://github.com/yourusername/react-day-night-toggle/issues"
+    "url": "https://github.com/NORMAL-EX/react-daynight-toggle/issues"
   },
   "main": "./dist/react-day-night-toggle.umd.js",
   "module": "./dist/react-day-night-toggle.es.js",
@@ -23,19 +23,11 @@
       "require": "./dist/react-day-night-toggle.umd.js",
       "types": "./dist/index.d.ts"
     },
-    "./dist/style.css": {
-      "import": "./dist/style.css",
-      "require": "./dist/style.css"
-    }
+    "./dist/style.css": "./dist/style.css",
+    "./style.css": "./dist/style.css"
   },
   "files": [
-    "dist/**/*.js",
-    "dist/**/*.d.ts",
-    "dist/**/*.css",
-    "!dist/**/*.svg",
-    "!dist/vite.svg",
-    "README.md",
-    "LICENSE"
+    "dist"
   ],
   "keywords": [
     "react",
@@ -52,14 +44,15 @@
   ],
   "scripts": {
     "dev": "vite",
-    "build": "tsc -p tsconfig.build.json && vite build",
+    "build": "tsc -p tsconfig.build.json && vite build && node build-umd.js",
+    "build:es": "tsc -p tsconfig.build.json && vite build",
+    "build:umd": "node build-umd.js",
     "preview": "vite preview",
-    "prepublishOnly": "npm run build",
-    "type-check": "tsc --noEmit"
+    "prepublishOnly": "npm run build"
   },
   "peerDependencies": {
-    "react": "^16.8.0 || ^17.0.0 || ^18.0.0",
-    "react-dom": "^16.8.0 || ^17.0.0 || ^18.0.0"
+    "react": ">=16.8.0",
+    "react-dom": ">=16.8.0"
   },
   "devDependencies": {
     "@types/node": "^20.0.0",

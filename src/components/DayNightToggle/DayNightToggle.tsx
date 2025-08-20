@@ -1,8 +1,9 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import styles from './DayNightToggle.module.css';
-import { DayNightToggleProps, CloudPosition } from './types';
+import type { DayNightToggleProps, CloudPosition } from './types';
 
-const DayNightToggle: React.FC<DayNightToggleProps> = ({
+// 使用 named export 而不是 default export
+export const DayNightToggle: React.FC<DayNightToggleProps> = ({
   theme = 'light',
   scale = 3,
   onChange,
@@ -47,18 +48,10 @@ const DayNightToggle: React.FC<DayNightToggleProps> = ({
     { right: '110em', bottom: '-55em' }
   ];
 
-  // 处理系统主题变化
+  // 同步 theme prop 变化
   useEffect(() => {
-    const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
-    const handleSystemTheme = (e: MediaQueryListEvent) => {
-      if (e.matches !== isDarkMode) {
-        handleToggle();
-      }
-    };
-
-    mediaQuery.addEventListener('change', handleSystemTheme);
-    return () => mediaQuery.removeEventListener('change', handleSystemTheme);
-  }, [isDarkMode]);
+    setIsDarkMode(theme === 'dark');
+  }, [theme]);
 
   // 云朵动画
   useEffect(() => {
@@ -208,5 +201,3 @@ const DayNightToggle: React.FC<DayNightToggleProps> = ({
     </div>
   );
 };
-
-export default DayNightToggle;

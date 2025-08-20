@@ -12,10 +12,9 @@ export default defineConfig({
     react(),
     dts({
       insertTypesEntry: true,
-      include: ['src/components/**/*', 'src/types/**/*'],
-      exclude: ['src/demo/**/*', 'src/main.tsx'],
+      include: ['src/**/*'],
+      exclude: ['src/demo/**/*', 'src/main.tsx', '**/*.test.tsx', '**/*.spec.tsx'],
       beforeWriteFile: (filePath, content) => {
-        // 移除 CSS 模块导入的类型错误
         if (content.includes("'.module.css'")) {
           return {
             filePath,
@@ -34,15 +33,22 @@ export default defineConfig({
       fileName: (format) => `react-day-night-toggle.${format}.js`,
     },
     rollupOptions: {
-      external: ['react', 'react-dom'],
+      external: ['react', 'react-dom', 'react/jsx-runtime'],
       output: {
+        // UMD 特定配置
+        name: 'ReactDayNightToggle',
         globals: {
           react: 'React',
           'react-dom': 'ReactDOM',
+          'react/jsx-runtime': 'React'
         },
+        // 重要：确保导出格式正确
+        exports: 'named',
+        assetFileNames: '[name][extname]'
       },
     },
     cssCodeSplit: false,
+    copyPublicDir: false,
   },
   css: {
     modules: {

@@ -1,2 +1,2 @@
-export { default } from './DayNightToggle';
+export { DayNightToggle } from './DayNightToggle';
 export type { DayNightToggleProps } from './types';
