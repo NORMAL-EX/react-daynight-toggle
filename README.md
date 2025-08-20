@@ -1,8 +1,8 @@
 # React Day Night Toggle
 
 <p align="center">
-  <img src="https://img.shields.io/npm/v/react-day-night-toggle" alt="npm version" />
-  <img src="https://img.shields.io/npm/dm/react-day-night-toggle" alt="npm downloads" />
+  <img src="https://img.shields.io/npm/v/react-daynight-toggle" alt="npm version" />
+  <img src="https://img.shields.io/npm/dm/react-daynight-toggle" alt="npm downloads" />
   <img src="https://img.shields.io/badge/license-MIT-blue.svg" alt="license" />
 </p>
 
@@ -170,4 +170,4 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 
 ## 🐛 Issues
 
-Found a bug? Please [create an issue](https://github.com/NORMAL-EX/react-day-night-toggle/issues).
+Found a bug? Please [create an issue](https://github.com/NORMAL-EX/react-daynight-toggle/issues).
