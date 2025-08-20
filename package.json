@@ -1,0 +1,75 @@
+{
+  "name": "react-day-night-toggle",
+  "version": "1.0.0",
+  "description": "A beautiful day/night theme toggle React component with smooth animations",
+  "author": "dddffgg",
+  "license": "MIT",
+  "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yourusername/react-day-night-toggle"
+  },
+  "homepage": "https://github.com/yourusername/react-day-night-toggle#readme",
+  "bugs": {
+    "url": "https://github.com/yourusername/react-day-night-toggle/issues"
+  },
+  "main": "./dist/react-day-night-toggle.umd.js",
+  "module": "./dist/react-day-night-toggle.es.js",
+  "types": "./dist/index.d.ts",
+  "style": "./dist/style.css",
+  "exports": {
+    ".": {
+      "import": "./dist/react-day-night-toggle.es.js",
+      "require": "./dist/react-day-night-toggle.umd.js",
+      "types": "./dist/index.d.ts"
+    },
+    "./dist/style.css": {
+      "import": "./dist/style.css",
+      "require": "./dist/style.css"
+    }
+  },
+  "files": [
+    "dist/**/*.js",
+    "dist/**/*.d.ts",
+    "dist/**/*.css",
+    "!dist/**/*.svg",
+    "!dist/vite.svg",
+    "README.md",
+    "LICENSE"
+  ],
+  "keywords": [
+    "react",
+    "toggle",
+    "theme",
+    "dark-mode",
+    "light-mode",
+    "day-night",
+    "switch",
+    "component",
+    "typescript",
+    "animation",
+    "ui-component"
+  ],
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -p tsconfig.build.json && vite build",
+    "preview": "vite preview",
+    "prepublishOnly": "npm run build",
+    "type-check": "tsc --noEmit"
+  },
+  "peerDependencies": {
+    "react": "^16.8.0 || ^17.0.0 || ^18.0.0",
+    "react-dom": "^16.8.0 || ^17.0.0 || ^18.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "@types/react": "^18.2.0",
+    "@types/react-dom": "^18.2.0",
+    "@vitejs/plugin-react": "^4.0.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "typescript": "^5.0.0",
+    "vite": "^5.0.0",
+    "vite-plugin-dts": "^3.0.0"
+  }
+}

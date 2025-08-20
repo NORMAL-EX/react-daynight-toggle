@@ -1,0 +1,389 @@
+* {
+  margin: 0;
+  padding: 0;
+  transition: 0.7s;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.container {
+  position: relative;
+  width: 180em;
+  height: 70em;
+  display: inline-block;
+  vertical-align: bottom;
+  transform: translate3d(0, 0, 0);
+}
+
+.wrapper {
+  position: relative;
+  width: 180em;
+  height: 70em;
+  border-radius: 100em;
+  box-shadow: inset 0 0 5em 3em rgba(0, 0, 0, 0.5);
+  overflow: hidden;
+  transition: 0.7s cubic-bezier(0, 0.5, 1, 1);
+  cursor: pointer;
+}
+
+.wrapper.light {
+  background-color: #4685c0;
+}
+
+.wrapper.dark {
+  background-color: #191e32;
+}
+
+.toggleBtn {
+  margin: 7.5em 0 0 7.5em;
+  width: 55em;
+  height: 55em;
+  border-radius: 50%;
+  transition: 1s cubic-bezier(0.56, 1.35, 0.52, 1);
+}
+
+.toggleBtn.sun {
+  background-color: #ffc323;
+  box-shadow: 3em 3em 5em rgba(0, 0, 0, 0.5),
+    inset -3em -5em 3em -3em rgba(0, 0, 0, 0.5),
+    inset 4em 5em 2em -2em #ffe650;
+  transform: translateX(0);
+}
+
+.toggleBtn.moon {
+  background-color: #c3c8d2;
+  box-shadow: 3em 3em 5em rgba(0, 0, 0, 0.5),
+    inset -3em -5em 3em -3em rgba(0, 0, 0, 0.5),
+    inset 4em 5em 2em -2em #ffffd2;
+  transform: translateX(110em);
+}
+
+.toggleBtn.sun.hovered {
+  transform: translateX(10em);
+}
+
+.toggleBtn.moon.hovered {
+  transform: translateX(100em);
+}
+
+.crater {
+  position: absolute;
+  background-color: #96a0b4;
+  box-shadow: inset 0 0 1em 1em rgba(0, 0, 0, 0.3);
+  border-radius: 50%;
+  transition: 0.5s;
+  opacity: 0;
+}
+
+.wrapper.dark .crater {
+  opacity: 1;
+}
+
+.crater:nth-child(1) {
+  top: 7.5em;
+  left: 25em;
+  width: 12.5em;
+  height: 12.5em;
+}
+
+.crater:nth-child(2) {
+  top: 20em;
+  left: 7.5em;
+  width: 20em;
+  height: 20em;
+}
+
+.crater:nth-child(3) {
+  top: 32.5em;
+  left: 32.5em;
+  width: 12.5em;
+  height: 12.5em;
+}
+
+.bgLayer {
+  position: absolute;
+  border-radius: 50%;
+  transition: 1s cubic-bezier(0.56, 1.35, 0.52, 1);
+}
+
+.bgLayer1 {
+  top: -20em;
+  left: -20em;
+  width: 110em;
+  height: 110em;
+  background-color: rgba(255, 255, 255, 0.2);
+  z-index: -2;
+}
+
+.bgLayer2 {
+  top: -32.5em;
+  left: -17.5em;
+  width: 135em;
+  height: 135em;
+  background-color: rgba(255, 255, 255, 0.1);
+  z-index: -3;
+}
+
+.bgLayer3 {
+  top: -45em;
+  left: -15em;
+  width: 160em;
+  height: 160em;
+  background-color: rgba(255, 255, 255, 0.05);
+  z-index: -4;
+}
+
+.wrapper.light .bgLayer {
+  transform: translateX(0);
+}
+
+.wrapper.dark .bgLayer1 {
+  transform: translateX(110em);
+}
+
+.wrapper.dark .bgLayer2 {
+  transform: translateX(80em);
+}
+
+.wrapper.dark .bgLayer3 {
+  transform: translateX(50em);
+}
+
+.clouds,
+.cloudsLight {
+  transition: 1s cubic-bezier(0.56, 1.35, 0.52, 1);
+}
+
+.wrapper.light .clouds,
+.wrapper.light .cloudsLight {
+  transform: translateY(10em);
+}
+
+.wrapper.dark .clouds,
+.wrapper.dark .cloudsLight {
+  transform: translateY(80em);
+}
+
+.cloudItem {
+  position: absolute;
+  background-color: #fff;
+  border-radius: 50%;
+  z-index: -1;
+  transition: transform 6s, right 1s, bottom 1s;
+}
+
+.cloudItem:nth-child(6n+1) {
+  width: 50em;
+  height: 50em;
+}
+
+.cloudItem:nth-child(6n+2) {
+  width: 60em;
+  height: 60em;
+}
+
+.cloudItem:nth-child(6n+3) {
+  width: 60em;
+  height: 60em;
+}
+
+.cloudItem:nth-child(6n+4) {
+  width: 60em;
+  height: 60em;
+}
+
+.cloudItem:nth-child(6n+5) {
+  width: 75em;
+  height: 75em;
+}
+
+.cloudItem:nth-child(6n+6) {
+  width: 60em;
+  height: 60em;
+}
+
+.clouds {
+  z-index: -2;
+}
+
+.cloudsLight {
+  position: absolute;
+  right: 0;
+  bottom: 25em;
+  opacity: 0.5;
+  z-index: -3;
+}
+
+.starField {
+  transform: translateY(-125em);
+  z-index: -2;
+  transition: 1s cubic-bezier(0.56, 1.35, 0.52, 1);
+  opacity: 0;
+}
+
+.starField.visible {
+  transform: translateY(-62.5em);
+  opacity: 1;
+}
+
+.large {
+  --size: 7.5em;
+}
+
+.mid {
+  --size: 5em;
+}
+
+.tiny {
+  --size: 3em;
+}
+
+.starElement {
+  position: absolute;
+  width: calc(2 * var(--size));
+  height: calc(2 * var(--size));
+  transition: 1s cubic-bezier(0.56, 1.35, 0.52, 1);
+  filter: drop-shadow(0 0 0.5em rgba(255, 255, 255, 0.5));
+}
+
+.starElement:nth-child(1) {
+  top: 11em;
+  left: 39em;
+  animation: twinkle 2s ease-in-out infinite;
+  animation-delay: 0s;
+}
+
+.starElement:nth-child(2) {
+  top: 39em;
+  left: 91em;
+  animation: shimmer 1.5s ease-in-out infinite;
+  animation-delay: 0.3s;
+}
+
+.starElement:nth-child(3) {
+  top: 26em;
+  left: 19em;
+  animation: twinkle 1.8s ease-in-out infinite;
+  animation-delay: 0.6s;
+}
+
+.starElement:nth-child(4) {
+  top: 37em;
+  left: 66em;
+  animation: shimmer 2.2s ease-in-out infinite;
+  animation-delay: 0.9s;
+}
+
+.starElement:nth-child(5) {
+  top: 21em;
+  left: 75em;
+  animation: twinkle 1.5s ease-in-out infinite;
+  animation-delay: 1.2s;
+}
+
+.starElement:nth-child(6) {
+  top: 51em;
+  left: 38em;
+  animation: shimmer 1.7s ease-in-out infinite;
+  animation-delay: 1.5s;
+}
+
+@keyframes twinkle {
+  0%,
+  100% {
+    opacity: 1;
+    filter: brightness(1);
+  }
+  50% {
+    opacity: 0.3;
+    filter: brightness(0.6);
+  }
+}
+
+@keyframes shimmer {
+  0%,
+  100% {
+    opacity: 0.8;
+    filter: brightness(1);
+  }
+  25% {
+    opacity: 1;
+    filter: brightness(1.5);
+  }
+  50% {
+    opacity: 0.4;
+    filter: brightness(0.8);
+  }
+  75% {
+    opacity: 1;
+    filter: brightness(1.3);
+  }
+}
+
+.sPart {
+  float: left;
+  width: var(--size);
+  height: var(--size);
+}
+
+.sPart:nth-child(1) {
+  background-image: radial-gradient(
+    circle var(--size) at left 0,
+    transparent var(--size),
+    #fff
+  );
+}
+
+.sPart:nth-child(2) {
+  background-image: radial-gradient(
+    circle var(--size) at right 0,
+    transparent var(--size),
+    #fff
+  );
+}
+
+.sPart:nth-child(3) {
+  background-image: radial-gradient(
+    circle var(--size) at 0 bottom,
+    transparent var(--size),
+    #fff
+  );
+}
+
+.sPart:nth-child(4) {
+  background-image: radial-gradient(
+    circle var(--size) at right bottom,
+    transparent var(--size),
+    #fff
+  );
+}
+
+/* 星星悬停时的位置调整 */
+.wrapper.dark .toggleBtn.hovered ~ .starField .starElement:nth-child(1) {
+  top: 10em;
+  left: 36em;
+}
+
+.wrapper.dark .toggleBtn.hovered ~ .starField .starElement:nth-child(2) {
+  top: 40em;
+  left: 87em;
+}
+
+.wrapper.dark .toggleBtn.hovered ~ .starField .starElement:nth-child(3) {
+  top: 26em;
+  left: 16em;
+}
+
+.wrapper.dark .toggleBtn.hovered ~ .starField .starElement:nth-child(4) {
+  top: 38em;
+  left: 63em;
+}
+
+.wrapper.dark .toggleBtn.hovered ~ .starField .starElement:nth-child(5) {
+  top: 20.5em;
+  left: 72em;
+}
+
+.wrapper.dark .toggleBtn.hovered ~ .starField .starElement:nth-child(6) {
+  top: 51.5em;
+  left: 35em;
+}
