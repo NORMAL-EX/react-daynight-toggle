@@ -1,8 +1,7 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import styles from './DayNightToggle.module.css';
-import type { DayNightToggleProps, CloudPosition } from './types';
+import type { DayNightToggleProps } from './types';
 
-// 使用 named export 而不是 default export
 export const DayNightToggle: React.FC<DayNightToggleProps> = ({
   theme = 'light',
   scale = 3,
@@ -15,38 +14,6 @@ export const DayNightToggle: React.FC<DayNightToggleProps> = ({
   const containerRef = useRef<HTMLDivElement>(null);
   const cloudIntervalRef = useRef<number | undefined>(undefined);
   const animationTimeoutRef = useRef<number | undefined>(undefined);
-
-  // 云朵初始位置
-  const defaultCloudPositions: CloudPosition[] = [
-    { right: '-20em', bottom: '10em' },
-    { right: '-10em', bottom: '-25em' },
-    { right: '20em', bottom: '-40em' },
-    { right: '50em', bottom: '-35em' },
-    { right: '75em', bottom: '-60em' },
-    { right: '110em', bottom: '-50em' },
-    { right: '-20em', bottom: '10em' },
-    { right: '-10em', bottom: '-25em' },
-    { right: '20em', bottom: '-40em' },
-    { right: '50em', bottom: '-35em' },
-    { right: '75em', bottom: '-60em' },
-    { right: '110em', bottom: '-50em' }
-  ];
-
-  // 悬停时的云朵位置
-  const hoverCloudPositions: CloudPosition[] = [
-    { right: '-24em', bottom: '10em' },
-    { right: '-12em', bottom: '-27em' },
-    { right: '17em', bottom: '-43em' },
-    { right: '46em', bottom: '-39em' },
-    { right: '70em', bottom: '-65em' },
-    { right: '109em', bottom: '-54em' },
-    { right: '-23em', bottom: '10em' },
-    { right: '-11em', bottom: '-26em' },
-    { right: '18em', bottom: '-42em' },
-    { right: '47em', bottom: '-38em' },
-    { right: '74em', bottom: '-64em' },
-    { right: '110em', bottom: '-55em' }
-  ];
 
   // 同步 theme prop 变化
   useEffect(() => {
@@ -81,7 +48,6 @@ export const DayNightToggle: React.FC<DayNightToggleProps> = ({
   const handleToggle = useCallback(() => {
     if (isAnimating) return;
 
-    // 立即重置悬浮状态
     setIsHovered(false);
     setIsAnimating(true);
     
@@ -115,6 +81,26 @@ export const DayNightToggle: React.FC<DayNightToggleProps> = ({
     fontSize: `${(scale / 3).toFixed(2)}px`
   };
 
+  // 云朵初始位置
+  const cloudPositions = [
+    { right: '-20em', bottom: '10em' },
+    { right: '-10em', bottom: '-25em' },
+    { right: '20em', bottom: '-40em' },
+    { right: '50em', bottom: '-35em' },
+    { right: '75em', bottom: '-60em' },
+    { right: '110em', bottom: '-50em' }
+  ];
+
+  // 悬停时的云朵位置
+  const hoverCloudPositions = [
+    { right: '-24em', bottom: '10em' },
+    { right: '-12em', bottom: '-27em' },
+    { right: '17em', bottom: '-43em' },
+    { right: '46em', bottom: '-39em' },
+    { right: '70em', bottom: '-65em' },
+    { right: '109em', bottom: '-54em' }
+  ];
+
   return (
     <div 
       className={`${styles.container} ${className}`} 
@@ -122,80 +108,84 @@ export const DayNightToggle: React.FC<DayNightToggleProps> = ({
       ref={containerRef}
     >
       <div 
-        className={`${styles.wrapper} ${isDarkMode ? styles.dark : styles.light}`}
+        className={`${styles.wrapper} ${isDarkMode ? styles.dark : styles.light} ${isHovered && !isAnimating ? styles.hovered : ''}`}
         onClick={handleToggle}
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
       >
         <div 
-          className={`${styles.toggleBtn} ${isDarkMode ? styles.moon : styles.sun} ${isHovered && !isAnimating ? styles.hovered : ''}`}
-          onMouseEnter={handleMouseEnter}
-          onMouseLeave={handleMouseLeave}
+          className={`${styles.toggleBtn} ${isDarkMode ? styles.moon : styles.sun}`}
         >
           <div className={styles.crater}></div>
           <div className={styles.crater}></div>
           <div className={styles.crater}></div>
         </div>
         
-        <div className={`${styles.bgLayer} ${styles.bgLayer1} ${isDarkMode ? styles.darkLayer1 : ''}`}></div>
-        <div className={`${styles.bgLayer} ${styles.bgLayer2} ${isDarkMode ? styles.darkLayer2 : ''}`}></div>
-        <div className={`${styles.bgLayer} ${styles.bgLayer3} ${isDarkMode ? styles.darkLayer3 : ''}`}></div>
+        {/* 波澜效果层 */}
+        <div className={`${styles.bgLayer} ${styles.bgLayer1}`}></div>
+        <div className={`${styles.bgLayer} ${styles.bgLayer2}`}></div>
+        <div className={`${styles.bgLayer} ${styles.bgLayer3}`}></div>
         
-        <div className={`${styles.clouds} ${isDarkMode ? styles.cloudsHidden : ''}`}>
-          {[...Array(6)].map((_, i) => (
+        {/* 主云朵层 */}
+        <div className={styles.clouds}>
+          {cloudPositions.map((pos, i) => (
             <div 
               key={`cloud-${i}`} 
               className={styles.cloudItem}
-              style={isHovered && !isDarkMode && !isAnimating ? hoverCloudPositions[i] : defaultCloudPositions[i]}
+              style={isHovered && !isDarkMode && !isAnimating ? hoverCloudPositions[i] : pos}
             />
           ))}
         </div>
         
-        <div className={`${styles.cloudsLight} ${isDarkMode ? styles.cloudsHidden : ''}`}>
-          {[...Array(6)].map((_, i) => (
+        {/* 次级云朵层 */}
+        <div className={styles.cloudsLight}>
+          {cloudPositions.map((pos, i) => (
             <div 
               key={`cloud-light-${i}`} 
               className={styles.cloudItem}
-              style={isHovered && !isDarkMode && !isAnimating ? hoverCloudPositions[i + 6] : defaultCloudPositions[i + 6]}
+              style={isHovered && !isDarkMode && !isAnimating ? hoverCloudPositions[i] : pos}
             />
           ))}
         </div>
         
+        {/* 星星层 */}
         <div className={`${styles.starField} ${isDarkMode ? styles.visible : ''}`}>
-          {[...Array(2)].map((_, i) => (
-            <div 
-              key={`star-large-${i}`} 
-              className={`${styles.starElement} ${styles.large}`}
-              data-index={i + 1}
-            >
-              <div className={styles.sPart}></div>
-              <div className={styles.sPart}></div>
-              <div className={styles.sPart}></div>
-              <div className={styles.sPart}></div>
-            </div>
-          ))}
-          {[...Array(2)].map((_, i) => (
-            <div 
-              key={`star-mid-${i}`} 
-              className={`${styles.starElement} ${styles.mid}`}
-              data-index={i + 3}
-            >
-              <div className={styles.sPart}></div>
-              <div className={styles.sPart}></div>
-              <div className={styles.sPart}></div>
-              <div className={styles.sPart}></div>
-            </div>
-          ))}
-          {[...Array(2)].map((_, i) => (
-            <div 
-              key={`star-tiny-${i}`} 
-              className={`${styles.starElement} ${styles.tiny}`}
-              data-index={i + 5}
-            >
-              <div className={styles.sPart}></div>
-              <div className={styles.sPart}></div>
-              <div className={styles.sPart}></div>
-              <div className={styles.sPart}></div>
-            </div>
-          ))}
+          <div className={`${styles.starElement} ${styles.large}`}>
+            <div className={styles.sPart}></div>
+            <div className={styles.sPart}></div>
+            <div className={styles.sPart}></div>
+            <div className={styles.sPart}></div>
+          </div>
+          <div className={`${styles.starElement} ${styles.large}`}>
+            <div className={styles.sPart}></div>
+            <div className={styles.sPart}></div>
+            <div className={styles.sPart}></div>
+            <div className={styles.sPart}></div>
+          </div>
+          <div className={`${styles.starElement} ${styles.mid}`}>
+            <div className={styles.sPart}></div>
+            <div className={styles.sPart}></div>
+            <div className={styles.sPart}></div>
+            <div className={styles.sPart}></div>
+          </div>
+          <div className={`${styles.starElement} ${styles.mid}`}>
+            <div className={styles.sPart}></div>
+            <div className={styles.sPart}></div>
+            <div className={styles.sPart}></div>
+            <div className={styles.sPart}></div>
+          </div>
+          <div className={`${styles.starElement} ${styles.tiny}`}>
+            <div className={styles.sPart}></div>
+            <div className={styles.sPart}></div>
+            <div className={styles.sPart}></div>
+            <div className={styles.sPart}></div>
+          </div>
+          <div className={`${styles.starElement} ${styles.tiny}`}>
+            <div className={styles.sPart}></div>
+            <div className={styles.sPart}></div>
+            <div className={styles.sPart}></div>
+            <div className={styles.sPart}></div>
+          </div>
         </div>
       </div>
     </div>

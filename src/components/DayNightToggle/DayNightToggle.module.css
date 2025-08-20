@@ -33,15 +33,19 @@
   background-color: #191e32;
 }
 
+/* 按钮基础样式 */
 .toggleBtn {
   margin: 7.5em 0 0 7.5em;
   width: 55em;
   height: 55em;
   border-radius: 50%;
   transition: 1s cubic-bezier(0.56, 1.35, 0.52, 1);
+  z-index: 10;
+  position: relative;
 }
 
-.toggleBtn.sun {
+/* 太阳样式 */
+.wrapper.light .toggleBtn.sun {
   background-color: #ffc323;
   box-shadow: 3em 3em 5em rgba(0, 0, 0, 0.5),
     inset -3em -5em 3em -3em rgba(0, 0, 0, 0.5),
@@ -49,7 +53,8 @@
   transform: translateX(0);
 }
 
-.toggleBtn.moon {
+/* 月亮样式 */
+.wrapper.dark .toggleBtn.moon {
   background-color: #c3c8d2;
   box-shadow: 3em 3em 5em rgba(0, 0, 0, 0.5),
     inset -3em -5em 3em -3em rgba(0, 0, 0, 0.5),
@@ -57,14 +62,41 @@
   transform: translateX(110em);
 }
 
-.toggleBtn.sun.hovered {
+/* 浅色模式悬停效果 */
+.wrapper.light.hovered .toggleBtn.sun {
   transform: translateX(10em);
 }
 
-.toggleBtn.moon.hovered {
+.wrapper.light.hovered .bgLayer1 {
+  transform: translateX(10em);
+}
+
+.wrapper.light.hovered .bgLayer2 {
+  transform: translateX(7em);
+}
+
+.wrapper.light.hovered .bgLayer3 {
+  transform: translateX(4em);
+}
+
+/* 深色模式悬停效果 */
+.wrapper.dark.hovered .toggleBtn.moon {
   transform: translateX(100em);
 }
 
+.wrapper.dark.hovered .bgLayer1 {
+  transform: translateX(100em);
+}
+
+.wrapper.dark.hovered .bgLayer2 {
+  transform: translateX(73em);
+}
+
+.wrapper.dark.hovered .bgLayer3 {
+  transform: translateX(46em);
+}
+
+/* 月球坑洞 */
 .crater {
   position: absolute;
   background-color: #96a0b4;
@@ -99,6 +131,7 @@
   height: 12.5em;
 }
 
+/* 背景波浪层 */
 .bgLayer {
   position: absolute;
   border-radius: 50%;
@@ -132,10 +165,20 @@
   z-index: -4;
 }
 
-.wrapper.light .bgLayer {
+/* 浅色模式下背景层默认位置 */
+.wrapper.light .bgLayer1 {
   transform: translateX(0);
 }
 
+.wrapper.light .bgLayer2 {
+  transform: translateX(0);
+}
+
+.wrapper.light .bgLayer3 {
+  transform: translateX(0);
+}
+
+/* 深色模式下背景层默认位置 */
 .wrapper.dark .bgLayer1 {
   transform: translateX(110em);
 }
@@ -148,6 +191,7 @@
   transform: translateX(50em);
 }
 
+/* 云朵层 */
 .clouds,
 .cloudsLight {
   transition: 1s cubic-bezier(0.56, 1.35, 0.52, 1);
@@ -171,32 +215,39 @@
   transition: transform 6s, right 1s, bottom 1s;
 }
 
-.cloudItem:nth-child(6n+1) {
+/* 云朵尺寸 */
+.clouds .cloudItem:nth-child(1),
+.cloudsLight .cloudItem:nth-child(1) {
   width: 50em;
   height: 50em;
 }
 
-.cloudItem:nth-child(6n+2) {
+.clouds .cloudItem:nth-child(2),
+.cloudsLight .cloudItem:nth-child(2) {
   width: 60em;
   height: 60em;
 }
 
-.cloudItem:nth-child(6n+3) {
+.clouds .cloudItem:nth-child(3),
+.cloudsLight .cloudItem:nth-child(3) {
   width: 60em;
   height: 60em;
 }
 
-.cloudItem:nth-child(6n+4) {
+.clouds .cloudItem:nth-child(4),
+.cloudsLight .cloudItem:nth-child(4) {
   width: 60em;
   height: 60em;
 }
 
-.cloudItem:nth-child(6n+5) {
+.clouds .cloudItem:nth-child(5),
+.cloudsLight .cloudItem:nth-child(5) {
   width: 75em;
   height: 75em;
 }
 
-.cloudItem:nth-child(6n+6) {
+.clouds .cloudItem:nth-child(6),
+.cloudsLight .cloudItem:nth-child(6) {
   width: 60em;
   height: 60em;
 }
@@ -213,6 +264,7 @@
   z-index: -3;
 }
 
+/* 星星场 */
 .starField {
   transform: translateY(-125em);
   z-index: -2;
@@ -245,6 +297,7 @@
   filter: drop-shadow(0 0 0.5em rgba(255, 255, 255, 0.5));
 }
 
+/* 星星位置和动画 */
 .starElement:nth-child(1) {
   top: 11em;
   left: 39em;
@@ -287,6 +340,38 @@
   animation-delay: 1.5s;
 }
 
+/* 深色模式悬停时星星位置 */
+.wrapper.dark.hovered .starElement:nth-child(1) {
+  top: 10em;
+  left: 36em;
+}
+
+.wrapper.dark.hovered .starElement:nth-child(2) {
+  top: 40em;
+  left: 87em;
+}
+
+.wrapper.dark.hovered .starElement:nth-child(3) {
+  top: 26em;
+  left: 16em;
+}
+
+.wrapper.dark.hovered .starElement:nth-child(4) {
+  top: 38em;
+  left: 63em;
+}
+
+.wrapper.dark.hovered .starElement:nth-child(5) {
+  top: 20.5em;
+  left: 72em;
+}
+
+.wrapper.dark.hovered .starElement:nth-child(6) {
+  top: 51.5em;
+  left: 35em;
+}
+
+/* 动画关键帧 */
 @keyframes twinkle {
   0%,
   100% {
@@ -319,6 +404,7 @@
   }
 }
 
+/* 星星部分 */
 .sPart {
   float: left;
   width: var(--size);
@@ -355,35 +441,4 @@
     transparent var(--size),
     #fff
   );
-}
-
-/* 星星悬停时的位置调整 */
-.wrapper.dark .toggleBtn.hovered ~ .starField .starElement:nth-child(1) {
-  top: 10em;
-  left: 36em;
-}
-
-.wrapper.dark .toggleBtn.hovered ~ .starField .starElement:nth-child(2) {
-  top: 40em;
-  left: 87em;
-}
-
-.wrapper.dark .toggleBtn.hovered ~ .starField .starElement:nth-child(3) {
-  top: 26em;
-  left: 16em;
-}
-
-.wrapper.dark .toggleBtn.hovered ~ .starField .starElement:nth-child(4) {
-  top: 38em;
-  left: 63em;
-}
-
-.wrapper.dark .toggleBtn.hovered ~ .starField .starElement:nth-child(5) {
-  top: 20.5em;
-  left: 72em;
-}
-
-.wrapper.dark .toggleBtn.hovered ~ .starField .starElement:nth-child(6) {
-  top: 51.5em;
-  left: 35em;
 }
