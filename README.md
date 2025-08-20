@@ -1,6 +1,6 @@
 # React Day Night Toggle
-<img width="180" height="71" src="https://github.com/user-attachments/assets/05c9db3b-8294-4690-b108-e582fd4da91c" />
-<img width="180" height="70" src="https://github.com/user-attachments/assets/27056668-0074-4b74-8871-9bcf3d22e68b" />
+<img width="180" height="70" src="https://github.com/user-attachments/assets/4120ee66-d76a-4217-b1cd-bc4e2997e2ba" />
+<img width="180" height="70" src="https://github.com/user-attachments/assets/068f91d0-eef0-4a80-b3fe-f9b7d73dbc25" />
 
 <br>
 <p align="center">
