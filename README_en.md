@@ -1,7 +1,7 @@
 # React Day Night Toggle
 
 <div align="right">
-  <a href="./README_en.md">English</a>
+  <a href="./README.md">简体中文</a>
 </div>
 
 <img width="180" height="70" src="https://github.com/user-attachments/assets/4120ee66-d76a-4217-b1cd-bc4e2997e2ba" />
@@ -14,44 +14,44 @@
   <img src="https://img.shields.io/badge/license-MIT-blue.svg" alt="license" />
 </p>
 
-一个美观流畅的 React 日夜切换动画组件，支持 TypeScript。
+A beautiful and smooth animated day/night toggle component for React applications with TypeScript support.
 
-## ✨ 特性
+## ✨ Features
 
-- 🌞 流畅的太阳到月亮过渡动画
-- ☁️ 飘动的云朵动画
-- ⭐ 闪烁的星星效果
-- 🎨 完全可自定义尺寸
-- 📱 响应式设计
-- 🔄 系统主题检测
-- ⚡ 高性能动画
-- 📦 轻量级 (~10KB gzipped)
-- 🔧 TypeScript 支持
-- 🎯 零依赖（仅需 React）
+- 🌞 Smooth sun to moon transition
+- ☁️ Animated floating clouds
+- ⭐ Twinkling stars effect
+- 🎨 Fully customizable size
+- 📱 Responsive design
+- 🔄 System theme detection
+- ⚡ High performance animations
+- 📦 Lightweight (~10KB gzipped)
+- 🔧 TypeScript support
+- 🎯 Zero dependencies (except React)
 
-## 📦 安装
+## 📦 Installation
 
 ```bash
 npm install react-daynight-toggle
-# 或
+# or
 yarn add react-daynight-toggle
-# 或
+# or
 pnpm add react-daynight-toggle
 ```
 
-## 🚀 快速开始
+## 🚀 Quick Start
 
 ```tsx
 import { useState } from 'react';
 import { DayNightToggle } from 'react-daynight-toggle';
-import 'react-daynight-toggle/dist/style.css'; // 别忘了导入CSS！
+import 'react-daynight-toggle/dist/style.css'; // Don't forget to import CSS!
 
 function App() {
   const [theme, setTheme] = useState<'light' | 'dark'>('light');
 
   const handleThemeChange = (newTheme: 'light' | 'dark') => {
     setTheme(newTheme);
-    // 将主题应用到你的应用
+    // Apply theme to your app
     document.documentElement.setAttribute('data-theme', newTheme);
   };
 
@@ -67,29 +67,29 @@ function App() {
 
 ## 📖 API
 
-### Props 属性
+### Props
 
-| 属性 | 类型 | 默认值 | 描述 |
+| Prop | Type | Default | Description |
 |------|------|---------|-------------|
-| `theme` | `'light' \| 'dark'` | `'light'` | 当前主题状态 |
-| `scale` | `number` | `3` | 尺寸缩放因子（推荐 1-5） |
-| `onChange` | `(theme: 'light' \| 'dark') => void` | - | 主题改变时的回调函数 |
-| `className` | `string` | `''` | 额外的 CSS 类名 |
+| `theme` | `'light' \| 'dark'` | `'light'` | Current theme state |
+| `scale` | `number` | `3` | Size scale factor (1-5 recommended) |
+| `onChange` | `(theme: 'light' \| 'dark') => void` | - | Callback when theme changes |
+| `className` | `string` | `''` | Additional CSS class for styling |
 
-## 💡 示例
+## 💡 Examples
 
-### 基础用法
+### Basic Usage
 ```tsx
 <DayNightToggle />
 ```
 
-### 主题管理
+### With Theme Management
 ```tsx
 function ThemeProvider() {
   const [theme, setTheme] = useState<'light' | 'dark'>('light');
 
   useEffect(() => {
-    // 将主题应用到 body
+    // Apply theme to body
     document.body.style.backgroundColor = 
       theme === 'dark' ? '#1a1a1a' : '#ffffff';
   }, [theme]);
@@ -103,13 +103,13 @@ function ThemeProvider() {
           scale={2.5}
         />
       </header>
-      {/* 你的应用内容 */}
+      {/* Your app content */}
     </div>
   );
 }
 ```
 
-### 自定义样式
+### Custom Styling
 ```tsx
 <DayNightToggle
   theme={theme}
@@ -128,7 +128,7 @@ function ThemeProvider() {
 }
 ```
 
-### 使用 LocalStorage 持久化
+### With LocalStorage Persistence
 ```tsx
 function App() {
   const [theme, setTheme] = useState<'light' | 'dark'>(() => {
@@ -151,31 +151,31 @@ function App() {
 }
 ```
 
-## 🎨 自定义
+## 🎨 Customization
 
-### 缩放示例
-- `scale={1}` - 微型 (60px × 23px)
-- `scale={2}` - 小型 (120px × 47px)
-- `scale={3}` - 中型 (180px × 70px) - 默认
-- `scale={4}` - 大型 (240px × 93px)
-- `scale={5}` - 超大型 (300px × 117px)
+### Scale Examples
+- `scale={1}` - Tiny (60px × 23px)
+- `scale={2}` - Small (120px × 47px)
+- `scale={3}` - Medium (180px × 70px) - Default
+- `scale={4}` - Large (240px × 93px)
+- `scale={5}` - Extra Large (300px × 117px)
 
-## 🌐 浏览器支持
+## 🌐 Browser Support
 
-- Chrome (最新版)
-- Firefox (最新版)
-- Safari (最新版)
-- Edge (最新版)
-- 移动端浏览器
+- Chrome (latest)
+- Firefox (latest)
+- Safari (latest)
+- Edge (latest)
+- Mobile browsers
 
-## 📄 许可证
+## 📄 License
 
 MIT © dddffgg
 
-## 🤝 贡献
+## 🤝 Contributing
 
-欢迎贡献！请随时提交 Pull Request。
+Contributions are welcome! Please feel free to submit a Pull Request.
 
-## 🐛 问题反馈
+## 🐛 Issues
 
-发现 bug？请[创建 issue](https://github.com/NORMAL-EX/react-daynight-toggle/issues)。
+Found a bug? Please [create an issue](https://github.com/NORMAL-EX/react-daynight-toggle/issues).
